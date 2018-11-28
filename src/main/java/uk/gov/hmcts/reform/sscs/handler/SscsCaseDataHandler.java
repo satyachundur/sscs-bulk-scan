@@ -38,19 +38,22 @@ public class SscsCaseDataHandler implements CaseDataHandler {
     private final SscsCcdConvertService convertService;
     private final EvidenceManagementService evidenceManagementService;
     private final CaseEvent caseEvent;
+    private final TestClass testClass;
 
     public SscsCaseDataHandler(CaseDataHelper caseDataHelper,
                                RoboticsService roboticsService,
                                RegionalProcessingCenterService regionalProcessingCenterService,
                                SscsCcdConvertService convertService,
                                EvidenceManagementService evidenceManagementService,
-                               CaseEvent caseEvent) {
+                               CaseEvent caseEvent,
+                               TestClass testClass) {
         this.caseDataHelper = caseDataHelper;
         this.roboticsService = roboticsService;
         this.regionalProcessingCenterService = regionalProcessingCenterService;
         this.convertService = convertService;
         this.evidenceManagementService = evidenceManagementService;
         this.caseEvent = caseEvent;
+        this.testClass = testClass;
     }
 
     public CallbackResponse handle(CaseResponse caseValidationResponse,
@@ -128,6 +131,7 @@ public class SscsCaseDataHandler implements CaseDataHandler {
     }
 
     private byte[] downloadBinary(SscsDocument doc) {
+        testClass.download(URI.create(doc.getValue().getDocumentLink().getDocumentUrl()));
         return evidenceManagementService.download(URI.create(doc.getValue().getDocumentLink().getDocumentUrl()));
     }
 
