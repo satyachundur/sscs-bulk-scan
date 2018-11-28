@@ -18,7 +18,7 @@
         {
           "value": {
             "key": "mrn_date",
-            "value": "09/11/2018"
+            "value": "2018-09-11"
           },
           "id": "7591499c-7c85-4fb4-b3f4-c73619f6b1e3"
         },
@@ -102,7 +102,7 @@
         {
           "value": {
             "key": "person1_dob",
-            "value": "11/11/1976"
+            "value": "1976-11-11"
           },
           "id": "8d556f91-13a4-4df5-a934-e69f5cd7141a"
         },
@@ -172,7 +172,7 @@
         {
           "value": {
             "key": "person2_dob",
-            "value": "09/12/1979"
+            "value": "1979-12-09"
           },
           "id": "8d556f91-13a4-4df5-a934-e69f5cd7141a"
         },
@@ -284,7 +284,7 @@
         {
           "value": {
             "key": "hearing_options_exclude_dates",
-            "value": "01/11/2018,01/12/2018"
+            "value": "2018-11-01,2018-12-01"
           },
           "id": "8d556f91-13a4-4df5-a934-e69f5cd7141a"
         },
@@ -354,7 +354,7 @@
         {
           "value": {
             "key": "signature_appeal_date",
-            "value": "01/04/2018"
+            "value": "2018-04-01"
           },
           "id": "8d556f91-13a4-4df5-a934-e69f5cd7141a"
         }
