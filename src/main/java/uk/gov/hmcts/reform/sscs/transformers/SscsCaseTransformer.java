@@ -43,7 +43,7 @@ public class SscsCaseTransformer implements CaseTransformer {
         errors = new ArrayList<>();
 
         ScannedData scannedData = sscsJsonExtractor.extractJson(caseDetails.getCaseData());
-        Appeal appeal = buildAppealFromData(scannedData.getOcrCaseData());
+        Appeal appeal = buildAppealFromData(scannedData.getOcrCaseData(), transformed);
         List<SscsDocument> sscsDocuments = buildDocumentsFromData(scannedData.getRecords());
 
         transformed.put("appeal", appeal);
@@ -63,7 +63,7 @@ public class SscsCaseTransformer implements CaseTransformer {
         return CaseResponse.builder().transformedCase(transformed).errors(errors).build();
     }
 
-    private Appeal buildAppealFromData(Map<String, Object> pairs) {
+    private Appeal buildAppealFromData(Map<String, Object> pairs, Map<String, Object> transformed) {
         Appellant appellant = null;
 
         if (pairs != null && pairs.size() != 0) {
@@ -78,9 +78,12 @@ public class SscsCaseTransformer implements CaseTransformer {
                         .build();
                 }
                 appellant = buildAppellant(pairs, PERSON2_VALUE, appointee, buildPersonContact(pairs, PERSON2_VALUE));
-
+                // Hack to work out person type after data has been transformed
+                transformed.put("appellantPersonType", PERSON2_VALUE);
             } else if (hasPerson(pairs, PERSON1_VALUE)) {
                 appellant = buildAppellant(pairs, PERSON1_VALUE, null, buildPersonContact(pairs, PERSON1_VALUE));
+                // Hack to work out person type after data has been transformed
+                transformed.put("appellantPersonType", PERSON1_VALUE);
             }
 
             String hearingType = findHearingType(pairs);

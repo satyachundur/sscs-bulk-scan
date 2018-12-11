@@ -30,6 +30,9 @@ public class SscsCaseValidator implements CaseValidator {
 
         validateAppeal(caseData);
 
+        // Hack to work out person type after data has been transformed
+        caseData.remove("appellantPersonType");
+
         return CaseResponse.builder()
             .errors(errors)
             .warnings(warnings)
@@ -40,8 +43,9 @@ public class SscsCaseValidator implements CaseValidator {
     private List<String> validateAppeal(Map<String, Object> caseData) {
 
         Appeal appeal = (Appeal) caseData.get("appeal");
+        String appellantPersonType = caseData.get("appellantPersonType") != null ? (String) caseData.get("appellantPersonType") : getPerson1OrPerson2(appeal.getAppellant());
 
-        checkAppellant(appeal, caseData);
+        checkAppellant(appeal, caseData, appellantPersonType);
         checkRepresentative(appeal, caseData);
 
         if (!doesMrnDateExist(appeal)) {
@@ -53,17 +57,13 @@ public class SscsCaseValidator implements CaseValidator {
         return warnings;
     }
 
-    private void checkAppellant(Appeal appeal, Map<String, Object> caseData) {
+    private void checkAppellant(Appeal appeal, Map<String, Object> caseData, String personType) {
         Appellant appellant = appeal.getAppellant();
-
-        String personType = getPerson1OrPerson2(appellant);
 
         Name appellantName = appellant != null ? appellant.getName() : null;
         Address appellantAddress = appellant != null ? appellant.getAddress() : null;
 
         checkPerson(appellantName, appellantAddress, personType, caseData);
-
-        checkAppointee(personType, appellant, caseData);
 
         if (!doesAppellantNinoExist(appellant)) {
             warnings.add(personType + "_nino is empty");
@@ -72,12 +72,13 @@ public class SscsCaseValidator implements CaseValidator {
         if (!isPhoneNumberValid(appellant)) {
             warnings.add(personType + "_phone is invalid");
         }
+
+        checkAppointee(appellant, caseData);
     }
 
-    private void checkAppointee(String personType, Appellant appellant, Map<String, Object> caseData) {
-        boolean doesAppointeeExist = personType == PERSON2_VALUE;
+    private void checkAppointee(Appellant appellant, Map<String, Object> caseData) {
 
-        if (doesAppointeeExist && appellant != null) {
+        if (appellant != null && !isAppointeeDetailsEmpty(appellant.getAppointee())) {
             checkPerson(appellant.getAppointee().getName(), appellant.getAppointee().getAddress(), PERSON1_VALUE, caseData);
         }
     }
@@ -174,7 +175,7 @@ public class SscsCaseValidator implements CaseValidator {
     }
 
     private String getPerson1OrPerson2(Appellant appellant) {
-        if (appellant == null || appellant.getAppointee() == null || isAppointeeDetailsEmpty(appellant.getAppointee())) {
+        if (appellant == null || isAppointeeDetailsEmpty(appellant.getAppointee())) {
             return PERSON1_VALUE;
         } else {
             return PERSON2_VALUE;
@@ -182,7 +183,8 @@ public class SscsCaseValidator implements CaseValidator {
     }
 
     private Boolean isAppointeeDetailsEmpty(Appointee appointee) {
-        return (isAddressEmpty(appointee.getAddress())
+        return appointee == null
+            || (isAddressEmpty(appointee.getAddress())
             && isContactEmpty(appointee.getContact())
             && isIdentityEmpty(appointee.getIdentity())
             && isNameEmpty(appointee.getName()));
