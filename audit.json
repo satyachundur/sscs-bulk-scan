@@ -38,5 +38,10 @@
 "100001_Unexpected Content-Type was returned_https://sscs-bulk-scan-aat.service.core-compute-aat.internal/5438081988920837748_GET" :  "ignore",
 "100001_Unexpected Content-Type was returned_https://sscs-bulk-scan-aat.service.core-compute-aat.internal/v2/6577415160921915898_GET" :  "ignore",
 "100000_A Client Error response code was returned by the server_https://sscs-bulk-scan-aat.service.core-compute-aat.internal/v2/6577415160921915898_GET" :  "ignore",
-"100000_A Client Error response code was returned by the server_https://sscs-bulk-scan-aat.service.core-compute-aat.internal/5438081988920837748_GET" :  "ignore"  
+"100000_A Client Error response code was returned by the server_https://sscs-bulk-scan-aat.service.core-compute-aat.internal/5438081988920837748_GET" :  "ignore",
+"100001_Unexpected Content-Type was returned_https://sscs-bulk-scan-aat.service.core-compute-aat.internal/v2/1340292054282208513_GET" : "ignore",
+"100001_Unexpected Content-Type was returned_https://sscs-bulk-scan-aat.service.core-compute-aat.internal/4751735876907512019_GET" : "ignore",
+"100000_A Client Error response code was returned by the server_https://sscs-bulk-scan-aat.service.core-compute-aat.internal/4751735876907512019_GET" : "ignore",
+"100000_A Client Error response code was returned by the server_https://sscs-bulk-scan-aat.service.core-compute-aat.internal/v2/1340292054282208513_GET" : "ignore"  
+  
 }
