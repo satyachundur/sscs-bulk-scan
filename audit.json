@@ -30,6 +30,9 @@
 "100000_A Client Error response code was returned by the server_https://sscs-bulk-scan-aat.service.core-compute-aat.internal/trace.axd_GET" : "ignore",
 "10035_Strict-Transport-Security Header Not Set_https://sscs-bulk-scan-aat.service.core-compute-aat.internal/v2/api-docs_GET" : "ignore",
 "10038_Content Security Policy (CSP) Header Not Set_https://sscs-bulk-scan-aat.service.core-compute-aat.internal/v2/api-docs_GET" : "ignore",
-"10036_Server Leaks Version Information via \"Server\" HTTP Response Header Field_https://sscs-bulk-scan-aat.service.core-compute-aat.internal/v2/api-docs_GET" : "ignore"
- 
+"10036_Server Leaks Version Information via \"Server\" HTTP Response Header Field_https://sscs-bulk-scan-aat.service.core-compute-aat.internal/v2/api-docs_GET" : "ignore",
+"100001_Unexpected Content-Type was returned_https://sscs-bulk-scan-aat.service.core-compute-aat.internal/7330217387507121331_GET" : "ignore",
+"100001_Unexpected Content-Type was returned_https://sscs-bulk-scan-aat.service.core-compute-aat.internal/v2/3262028434956225094_GET" : "ignore",
+"100000_A Client Error response code was returned by the server_https://sscs-bulk-scan-aat.service.core-compute-aat.internal/v2/3262028434956225094_GET" : "ignore",
+"100000_A Client Error response code was returned by the server_https://sscs-bulk-scan-aat.service.core-compute-aat.internal/7330217387507121331_GET" : "ignore"
 }
